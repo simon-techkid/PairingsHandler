@@ -13,43 +13,28 @@ namespace PairingsHandler;
 /// a list of objects of type <typeparamref name="TEntry1"/>, each containing values of type <typeparamref name="TData1"/>
 /// and a list of objects of type <typeparamref name="TEntry2"/>, each containing values of type <typeparamref name="TData2"/>.
 /// </summary>
-/// <typeparam name="THolder"></typeparam>
-/// <typeparam name="TData1"></typeparam>
-/// <typeparam name="TData2"></typeparam>
-/// <typeparam name="TEntry1"></typeparam>
-/// <typeparam name="TEntry2"></typeparam>
-public abstract partial class PairingsHandler<THolder, TData1, TData2, TEntry1, TEntry2> :
-    StringBroadcasterBase, IEnumerable<THolder>, IComparable<TEntry1, TEntry2>
+/// <typeparam name="THolder">The type of the list of pairs.</typeparam>
+/// <typeparam name="TData1">The type of the values of the <typeparamref name="TEntry1"/> objects.</typeparam>
+/// <typeparam name="TData2">The type of the values of the <typeparamref name="TEntry2"/> objects.</typeparam>
+/// <typeparam name="TEntry1">The type of the first object in the pair.</typeparam>
+/// <typeparam name="TEntry2">The type of the second object in the pair.</typeparam>
+/// <remarks>
+/// Create a handler for pairing <typeparamref name="TEntry1"/> information with <typeparamref name="TEntry2"/> information, stored in a list of type <typeparamref name="THolder"/>.
+/// </remarks>
+public abstract partial class PairingsHandler<THolder, TData1, TData2, TEntry1, TEntry2>(StringBroadcaster bcast) :
+    StringBroadcasterBase(bcast),
+    IPairingsHandler<THolder, TData1, TData2, TEntry1, TEntry2>,
+    IComparable<TEntry1, TEntry2>
     where THolder : IPairHolder<TData1, TData2, TEntry1, TEntry2>
     where TEntry1 : IPairable<TData1>
     where TEntry2 : IPairable<TData2>
 {
-    protected List<THolder> Pairs { get; set; }
+    protected List<THolder> Pairs { get; set; } = [];
 
-    /// <summary>
-    /// The name of this set of pairings.
-    /// </summary>
     public abstract string Name { get; }
 
-    /// <summary>
-    /// Create a handler for pairing GPS information with Song information.
-    /// </summary>
-    protected PairingsHandler(StringBroadcaster bcast) : base(bcast)
-    {
-        Pairs = new();
-    }
-
-    /// <summary>
-    /// Create a list of pairs of type <typeparamref name="THolder"/> by pairing lists of type <typeparamref name="TEntry1"/> and of type <typeparamref name="TEntry2"/> objects.
-    /// </summary>
-    /// <param name="entry1s">A list of type <typeparamref name="TEntry1"/> objects.</param>
-    /// <param name="entry2s">A list of type <typeparamref name="TEntry2"/> objects.</param>
     public virtual void CalculatePairings(List<TEntry1> entry1s, List<TEntry2> entry2s) => Pairs = PairPoints(entry1s, entry2s);
 
-    /// <summary>
-    /// Create a <see cref="PairingsHandler{THolder, TData1, TData2, TEntry1, TEntry2}"/> from a pre-existing list of pairs of type <typeparamref name="THolder"/>.
-    /// </summary>
-    /// <param name="pairs">A list of pairs of type <typeparamref name="THolder"/>.</param>
     public virtual void CalculatePairings(List<THolder> pairs) => Pairs = pairs;
 
     /// <summary>
@@ -132,9 +117,6 @@ public abstract partial class PairingsHandler<THolder, TData1, TData2, TEntry1, 
 
     protected abstract TEntry2 NarrowDown(TEntry1 element, IList<TEntry2> elements);
 
-    /// <summary>
-    /// Run specific tasks after all pairings have been created.
-    /// </summary>
     public virtual void FinalizePairings() { }
 
     public IEnumerator<THolder> GetEnumerator()
