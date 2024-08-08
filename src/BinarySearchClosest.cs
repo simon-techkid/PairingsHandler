@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace PairingsHandler;
 
-public abstract class BinarySearchClosest<THolder, TData1, TData2, TEntry1, TEntry2>(StringBroadcaster bcast) :
+public abstract class BinarySearchClosest<THolder, TData1, TData2, TEntry1, TEntry2>(IBroadcaster<string> bcast) :
     PairingsHandlerBase<THolder, TData1, TData2, TEntry1, TEntry2>(bcast),
     IComparable<TData1, TData2>
     where THolder : IPairHolder<TData1, TData2, TEntry1, TEntry2>

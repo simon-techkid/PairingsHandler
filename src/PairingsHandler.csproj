@@ -6,14 +6,13 @@
     <Nullable>enable</Nullable>
     <NoWin32Manifest>true</NoWin32Manifest>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <RepositoryUrl>https://github.com/TheBoyLeastLikelyTo/ApiMetadataHandler</RepositoryUrl>
+    <RepositoryUrl>https://github.com/TheBoyLeastLikelyTo/PairingsHandler</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>api;metadata</PackageTags>
     <NeutralLanguage>en</NeutralLanguage>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <PackageProjectUrl>https://github.com/TheBoyLeastLikelyTo/ApiMetadataHandler</PackageProjectUrl>
-    <Description>A C# library for collecting metadata from APIs (or other sources) and saving it in existing objects.</Description>
-    <Title>ApiMetadataHandler</Title>
+    <PackageProjectUrl>https://github.com/TheBoyLeastLikelyTo/PairingsHandler</PackageProjectUrl>
+    <Title>PairingsHandler</Title>
     <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
@@ -33,9 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="Logging">
-      <HintPath>..\..\Hashing\src\bin\Release\net8.0\Logging.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\..\Logging\src\Logging.csproj" />
   </ItemGroup>
 
   <ItemGroup>

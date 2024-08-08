@@ -1,5 +1,6 @@
 ﻿// PairingsHandler by Simon Field
 
+using Logging;
 using Logging.Broadcasting;
 using System.Collections.Generic;
 
@@ -18,14 +19,16 @@ namespace PairingsHandler;
 /// <remarks>
 /// Create a handler for pairing <typeparamref name="TEntry1"/> information with <typeparamref name="TEntry2"/> information, stored in a list of type <typeparamref name="THolder"/>.
 /// </remarks>
-public abstract class PairingsHandlerBase<THolder, TData1, TData2, TEntry1, TEntry2>(StringBroadcaster bcast) :
-    StringBroadcasterBase(bcast),
+public abstract class PairingsHandlerBase<THolder, TData1, TData2, TEntry1, TEntry2>(IBroadcaster<string> bcast) :
+    ILogger<string>,
     IPairingsHandler<THolder, TData1, TData2, TEntry1, TEntry2>,
     IEnumerable<THolder>
     where THolder : IPairHolder<TData1, TData2, TEntry1, TEntry2>
     where TEntry1 : IPairable<TData1>
     where TEntry2 : IPairable<TData2>
 {
+    public IBroadcaster<string> BCaster { get; } = bcast;
+
     public abstract string Name { get; }
 
     protected List<THolder> Pairs { get; set; } = [];

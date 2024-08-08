@@ -5,7 +5,7 @@ using System;
 
 namespace PairingsHandler;
 
-public abstract class BinarySearchDateTimeOffset<THolder, TEntry1, TEntry2>(StringBroadcaster bcast) :
+public abstract class BinarySearchDateTimeOffset<THolder, TEntry1, TEntry2>(IBroadcaster<string> bcast) :
     BinarySearchClosest<THolder, DateTimeOffset, DateTimeOffset, TEntry1, TEntry2>(bcast)
     where THolder : IPairHolder<DateTimeOffset, DateTimeOffset, TEntry1, TEntry2>
     where TEntry1 : IPairable<DateTimeOffset>
