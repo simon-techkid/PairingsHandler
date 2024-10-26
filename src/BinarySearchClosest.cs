@@ -5,6 +5,14 @@ using System.Collections.Generic;
 
 namespace PairingsHandler;
 
+/// <summary>
+/// An abstract class for finding the closest value in a list of values of type <typeparamref name="TEntry1"/> to a target value of type <typeparamref name="TEntry2"/>.
+/// </summary>
+/// <typeparam name="THolder">The object containing both objects of type <typeparamref name="TEntry1"/> and <typeparamref name="TEntry2"/> in the pair.</typeparam>
+/// <typeparam name="TData1">The data type of <typeparamref name="TEntry1"/>'s object.</typeparam>
+/// <typeparam name="TData2">The data type of <typeparamref name="TEntry2"/>'s object.</typeparam>
+/// <typeparam name="TEntry1">The first entry in the pair, <typeparamref name="THolder"/>.</typeparam>
+/// <typeparam name="TEntry2">The second entry in the pair, <typeparamref name="THolder"/>.</typeparam>
 public abstract class BinarySearchClosest<THolder, TData1, TData2, TEntry1, TEntry2>() :
     PairingsHandlerBase<THolder, TData1, TData2, TEntry1, TEntry2>,
     IComparable<TData1, TData2>
@@ -74,7 +82,7 @@ public abstract class BinarySearchClosest<THolder, TData1, TData2, TEntry1, TEnt
 
         if (left >= values.Count)
         {
-            closestValue = values[^1];
+            closestValue = values[values.Count - 1];
             return true;
         }
 

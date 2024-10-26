@@ -4,6 +4,15 @@ using System.Collections.Generic;
 
 namespace PairingsHandler;
 
+/// <summary>
+/// Handle the creation of a list of pairs of type <typeparamref name="THolder"/> by pairing objects of type <typeparamref name="TData1"/> and <typeparamref name="TData2"/>.
+/// Objects of type <typeparamref name="TData1"/> are contained within objects of type <typeparamref name="TEntry1"/>, and objects of type <typeparamref name="TData2"/> are contained within objects of type <typeparamref name="TEntry2"/>.
+/// </summary>
+/// <typeparam name="THolder">The object containing both objects of type <typeparamref name="TEntry1"/> and <typeparamref name="TEntry2"/> in the pair.</typeparam>
+/// <typeparam name="TData1">The data type of the data within the first pairable object, of type <typeparamref name="TOne"/>.</typeparam>
+/// <typeparam name="TData2">The data type of the data within the second pairable object, of type <typeparamref name="TTwo"/>.</typeparam>
+/// <typeparam name="TEntry1">The first pairable object, containing an object of type <typeparamref name="TData1"/>.</typeparam>
+/// <typeparam name="TEntry2">The second pairable object, containing an object of type <typeparamref name="TData2"/>.</typeparam>
 public interface IPairingsHandler<THolder, TData1, TData2, TEntry1, TEntry2> :
     IEnumerable<THolder>
     where THolder : IPairHolder<TData1, TData2, TEntry1, TEntry2>

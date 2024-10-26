@@ -2,6 +2,12 @@
 
 namespace PairingsHandler;
 
+/// <summary>
+/// An interface for comparing two objects, each within the same pairing.
+/// The first object being compared is of type <typeparamref name="TOne"/> and the second object is of type <typeparamref name="TTwo"/>.
+/// </summary>
+/// <typeparam name="TOne"></typeparam>
+/// <typeparam name="TTwo"></typeparam>
 public interface IComparable<TOne, TTwo>
 {
     /// <summary>
@@ -20,5 +26,5 @@ public interface IComparable<TOne, TTwo>
     /// <br />
     /// Greater than zero – <paramref name="one"/> follows <paramref name="two"/> in the sort order.
     /// </returns>
-    int Compare(TOne one, TTwo two);
+    public int Compare(TOne one, TTwo two);
 }

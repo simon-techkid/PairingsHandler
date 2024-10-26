@@ -26,6 +26,9 @@ public abstract class PairingsHandlerBase<THolder, TData1, TData2, TEntry1, TEnt
 {
     public abstract string Name { get; }
 
+    /// <summary>
+    /// The list of pairs of type <typeparamref name="THolder"/>.
+    /// </summary>
     protected List<THolder> Pairs { get; set; } = [];
 
     public virtual void CalculatePairings(List<TEntry1> entry1s, List<TEntry2> entry2s) => Pairs = PairPoints(entry1s, entry2s);
